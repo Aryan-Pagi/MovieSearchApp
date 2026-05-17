@@ -1,18 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { FavouritesContext } from "../context/FavouritesContext";
 
-const Favourites = ({ favourites: favouritesProp }) => {
-  const [favourites, setFavourites] = useState(() => favouritesProp || []);
-
-  useEffect(() => {
-    if (!favouritesProp) {
-      try {
-        const stored = JSON.parse(localStorage.getItem("favourites")) || [];
-        setFavourites(stored);
-      } catch {
-        setFavourites([]);
-      }
-    }
-  }, [favouritesProp]);
+const Favourites = () => {
+  const { favourites } = useContext(FavouritesContext);
 
   return (
     <section className="w-full">

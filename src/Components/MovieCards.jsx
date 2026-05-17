@@ -1,16 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { FavouritesContext } from "../context/FavouritesContext";
 
-const MovieCards = ({
-  Poster,
-  Title,
-  Year,
-  imdbID,
-  onFavourite,
-  isFavourite = false,
-}) => {
-
-  const navigate=useNavigate();
+const MovieCards = ({ Poster, Title, Year, imdbID }) => {
+  const navigate = useNavigate();
+  const { favourites, toggleFavourite } = useContext(FavouritesContext);
+  const isFavourite = favourites.some((f) => f.imdbID === imdbID);
 
   return (
     <div className="m-4 w-64 bg-linear-to-b from-gray-800 to-gray-900 text-white rounded-2xl shadow-2xl overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-200">
@@ -37,7 +33,7 @@ const MovieCards = ({
         <div className="mt-4 flex items-center justify-between">
           <button
             type="button"
-            onClick={() => onFavourite({ Poster, Title, Year, imdbID })}
+            onClick={() => toggleFavourite({ Poster, Title, Year, imdbID })}
             aria-label={isFavourite ? "Remove favourite" : "Add to favourites"}
             className={`flex items-center gap-2 px-3 py-1 rounded-full transition-colors ${isFavourite ? "bg-red-500" : "bg-white/10 hover:bg-white/20"}`}
           >
@@ -50,7 +46,7 @@ const MovieCards = ({
           <button
             type="button"
             aria-label={`View details for ${Title}`}
-            onClick={()=>navigate(`/movie/${imdbID}`)}
+            onClick={() => navigate(`/movie/${imdbID}`)}
             className="px-3 py-1 bg-indigo-500 text-white font-medium rounded-md hover:bg-indigo-600 transition-colors"
           >
             Details

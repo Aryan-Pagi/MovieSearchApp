@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import SearchBar from "../Components/SearchBar";
 import MovieCards from "../Components/MovieCards";
 
-const HomePage = ({ favourites = [], toggleFavourite }) => {
+const HomePage = () => {
   const API_KEY = import.meta.env.VITE_OMDB_API_KEY || "a62c88d9";
 
   const [movies, setMovies] = useState([]);
@@ -74,14 +74,7 @@ const HomePage = ({ favourites = [], toggleFavourite }) => {
             Loading......
           </div>
         ) : (
-          movies.map((movie) => (
-            <MovieCards
-              key={movie.imdbID}
-              {...movie}
-              isFavourite={favourites.some((f) => f.imdbID === movie.imdbID)}
-              onFavourite={toggleFavourite}
-            />
-          ))
+          movies.map((movie) => <MovieCards key={movie.imdbID} {...movie} />)
         )}
         {error && <h3 className="col-span-full text-red-400">{error}</h3>}
         {!loading && movies.length === 0 && !error && (

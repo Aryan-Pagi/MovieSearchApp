@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FavouritesContext } from "../context/FavouritesContext";
 
-const Navbar = ({ favouritesCount = 0 }) => {
+const Navbar = () => {
+  const {favourites}=useContext(FavouritesContext);
+
   return (
     <nav className="w-full px-6 py-4 bg-linear-to-r from-indigo-700 via-purple-600 to-pink-500 text-white shadow-md">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -24,7 +27,7 @@ const Navbar = ({ favouritesCount = 0 }) => {
           <Link to="/favourites" className="relative">
             <span className="hover:underline text-white/95">Favourites</span>
             <span className="ml-2 inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-white text-indigo-700 absolute">
-              {favouritesCount}
+              {favourites.length}
             </span>
           </Link>
         </div>
