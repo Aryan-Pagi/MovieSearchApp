@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const MovieCards = ({
   Poster,
@@ -8,6 +9,9 @@ const MovieCards = ({
   onFavourite,
   isFavourite = false,
 }) => {
+
+  const navigate=useNavigate();
+
   return (
     <div className="m-4 w-64 bg-linear-to-b from-gray-800 to-gray-900 text-white rounded-2xl shadow-2xl overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-200">
       <div className="w-full h-80 bg-gray-700 relative">
@@ -29,9 +33,6 @@ const MovieCards = ({
         <h3 className="text-lg font-semibold truncate" title={Title}>
           {Title}
         </h3>
-        <p className="text-sm text-white/70 mt-1">
-          {/* additional meta could go here */}
-        </p>
 
         <div className="mt-4 flex items-center justify-between">
           <button
@@ -49,6 +50,7 @@ const MovieCards = ({
           <button
             type="button"
             aria-label={`View details for ${Title}`}
+            onClick={()=>navigate(`/movie/${imdbID}`)}
             className="px-3 py-1 bg-indigo-500 text-white font-medium rounded-md hover:bg-indigo-600 transition-colors"
           >
             Details

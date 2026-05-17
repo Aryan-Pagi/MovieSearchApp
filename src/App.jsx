@@ -3,6 +3,7 @@ import "./App.css";
 import Favourites from "./Pages/Favourites";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
+import MovieDetails from "./Pages/MovieDetails";
 import Navbar from "./Components/Navbar";
 
 function App() {
@@ -49,6 +50,10 @@ function App() {
             <Route
               path="/favourites"
               element={<Favourites favourites={favourites} />}
+            />
+            <Route 
+              path="/movie/:id"
+              element={<MovieDetails />}
             />
           </Routes>
         </div>
